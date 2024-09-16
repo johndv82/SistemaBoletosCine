@@ -1,0 +1,25 @@
+{
+  "name": "sistemaboletoscine",
+  "version": "1.0.0",
+  "description": "Proyecto Final Node.js Tecsup",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johndv82/SistemaBoletosCine.git"
+  },
+  "author": "Yhon Denos Valencia, Luis Espetia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johndv82/SistemaBoletosCine/issues"
+  },
+  "homepage": "https://github.com/johndv82/SistemaBoletosCine#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "socket.io": "^4.7.5"
+  }
+}
