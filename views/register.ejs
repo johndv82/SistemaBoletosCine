@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - CineTickets</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container shadow">
+            <h1>Regístrate</h1>
+            <form action="/register" method="POST">
+                <div class="mb-4">
+                    <input type="text" class="form-control" name="firstName" placeholder="Nombre" required>
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="form-control" name="lastName" placeholder="Apellido" required>
+                </div>
+                <div class="mb-4">
+                    <input type="email" class="form-control" name="email" placeholder="Correo Electrónico" required>
+                </div>
+                <div class="mb-4">
+                    <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+                </div>
+                <div class="mb-4">
+                    <input type="password" class="form-control" name="confirmPassword"
+                        placeholder="Confirmar Contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-orange w-100 mb-3">Registrarse</button>
+            </form>
+            <div class="text-center links">
+                <a href="/">¿Ya tienes una cuenta? Inicia Sesión</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

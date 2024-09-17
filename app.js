@@ -19,7 +19,11 @@ app.use(express.static(path.join(__dirname, "node_modules/bootstrap/dist/")));
 
 
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('login.ejs');
+});
+
+app.get('/register', (req, res) => {
+    res.render('register.ejs');
 });
 
 

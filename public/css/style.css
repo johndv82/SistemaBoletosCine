@@ -1,0 +1,75 @@
+/* General Body Styling */
+body {
+    /*background-color: #f1e7d7; /* Color de fondo suave */
+    background: url('/img/cinema2.jpg') no-repeat center center fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* Form Container Styling */
+.form-container {
+    background-color: #fff; /* Fondo blanco para buen contraste */
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más ligera */
+}
+
+/* Input Fields */
+.form-control {
+    background-color: #f9f9f9; /* Fondo claro para los inputs */
+    border: 1px solid #ced4da; /* Borde suave y claro */
+    color: #495057; /* Texto oscuro para mejor legibilidad */
+    border-radius: 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+    padding: 10px;
+}
+
+/* Focused Input Fields */
+.form-control:focus {
+    background-color: #fff;
+    border: 1px solid #ff8000; /* Borde naranja al enfocarse */
+    box-shadow: 0px 0px 5px rgba(255, 128, 0, 0.5); /* Sombra con el mismo color */
+    color: #495057;
+}
+
+/* Submit Button Styling */
+.btn-orange {
+    background-color: #ff8000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.btn-orange:hover {
+    background-color: #e67300; /* Efecto hover en un tono más oscuro */
+}
+
+/* Link Styling */
+.links a {
+    color: #ff8000;
+}
+
+.links a:hover {
+    color: #e67300;
+}
+
+/* Titles */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Margin Adjustments */
+.mb-4 {
+    margin-bottom: 25px !important;
+}
