@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccionar Asientos - CineTickets</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/reservation.css">
+</head>
+<body>
+    <div class="fullscreen-container">
+        <!-- Navbar (Opcional) -->
+        <div class="navbar">
+            <h1>CineTickets</h1>
+        </div>
+        <div class="content">
+            <h2 class="text-center">Selecciona tus Asientos</h2>
+            <!-- Seat Grid (60 Seats) -->
+            <div class="seat-grid mt-4">
+                <!-- Generamos 60 asientos -->
+                <!-- Puedes utilizar un script o backend para generar dinámicamente estos asientos -->
+                <!-- Aquí te muestro un ejemplo estático -->
+                <% for (let i = 1; i <= 60; i++) { %>
+                    <div class="seat" data-seat="A<%= i %>">A<%= i %></div>
+                <% } %>
+            </div>
+            <!-- Continue Button -->
+            <div class="mt-4 text-center">
+                <a href="confirm-reservation.html" class="btn btn-confirm">Confirmar Asientos</a>
+            </div>
+        </div>
+    </div>
+    <!-- Script para manejar la selección de asientos -->
+    <script>
+        const seats = document.querySelectorAll('.seat:not(.taken)');
+        seats.forEach(seat => {
+            seat.addEventListener('click', () => {
+                seat.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+</html>

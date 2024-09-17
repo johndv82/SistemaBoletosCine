@@ -26,6 +26,18 @@ app.get('/register', (req, res) => {
     res.render('register.ejs');
 });
 
+app.get('/selectmovie', (req, res) => {
+    res.render('select-movie.ejs');
+});
+
+app.get('/selectseat', (req, res) => {
+    res.render('select-seats.ejs');
+});
+
+app.get('/confirm', (req, res) => {
+    res.render('confirm-reservation.ejs');
+});
+
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

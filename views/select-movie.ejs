@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Película - CineTickets</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/reservation.css">
+</head>
+<body>
+    <div class="fullscreen-container">
+        <!-- Navbar (Opcional) -->
+        <div class="navbar">
+            <h1>CineTickets</h1>
+        </div>
+
+        <div class="content">
+            <h2 class="text-center mb-4">Selecciona tu Película</h2>
+
+            <!-- Contenedor de Películas - Estructura Vertical -->
+            <div class="movie-list-container">
+                <!-- Película (Ejemplo 1) -->
+                <div class="movie-card d-flex align-items-center mb-4">
+                    <div class="movie-banner-vertical" style="background-image: url('/img/IronMan3.jpg');"></div>
+                    <div class="movie-details ms-4">
+                        <h2>Película A</h2>
+                        <!-- Selección de Fechas -->
+                        <div class="options-container mb-2">
+                            <button>14 Sep</button>
+                            <button>15 Sep</button>
+                            <button>16 Sep</button>
+                        </div>
+                        <!-- Selección de Horarios -->
+                        <div class="options-container">
+                            <button>16:00</button>
+                            <button>18:30</button>
+                            <button>21:00</button>
+                        </div>
+                        <!-- Botón para seleccionar asientos -->
+                        <div class="mt-3">
+                            <a href="select-seats.html" class="btn btn-orange">Seleccionar Asientos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Película (Ejemplo 2) -->
+                <div class="movie-card d-flex align-items-center mb-4">
+                    <div class="movie-banner-vertical" style="background-image: url('/img/IronMan3.jpg');"></div>
+                    <div class="movie-details ms-4">
+                        <h2>Película B</h2>
+                        <div class="options-container mb-2">
+                            <button>14 Sep</button>
+                            <button>15 Sep</button>
+                            <button>16 Sep</button>
+                        </div>
+                        <div class="options-container">
+                            <button>14:00</button>
+                            <button>16:45</button>
+                            <button>19:30</button>
+                        </div>
+                        <div class="mt-3">
+                            <a href="select-seats.html" class="btn btn-orange">Seleccionar Asientos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Película (Ejemplo 3) -->
+                <div class="movie-card d-flex align-items-center mb-4">
+                    <div class="movie-banner-vertical" style="background-image: url('/img/IronMan3.jpg');"></div>
+                    <div class="movie-details ms-4">
+                        <h2>Película C</h2>
+                        <div class="options-container mb-2">
+                            <button>14 Sep</button>
+                            <button>15 Sep</button>
+                            <button>16 Sep</button>
+                        </div>
+                        <div class="options-container">
+                            <button>17:00</button>
+                            <button>19:45</button>
+                            <button>22:00</button>
+                        </div>
+                        <div class="mt-3">
+                            <a href="select-seats.html" class="btn btn-orange">Seleccionar Asientos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+/* reservation.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background-color: #f4f4f9;
+}
+
+/* Fullscreen Container */
+.fullscreen-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar (Optional) */
+.navbar {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+}
+
+/* Content Area */
+.content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo para Movie List en vista vertical */
+.movie-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%;
+}
+
+.movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.movie-banner-vertical {
+    width: 150px;
+    height: 225px;
+    background-size: cover;
+    background-position: center;
+}
+
+.movie-details {
+    padding: 20px;
+}
+
+.movie-details h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.options-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #343a40;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.options-container button:hover {
+    background-color: #495057;
+}
+
+.options-container .selected {
+    background-color: #e67300;
+}
+
+/* Seat Selection Styling */
+.seat-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #ced4da;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.seat.selected {
+    background-color: #ff8000;
+    color: white;
+}
+
+.seat:hover {
+    background-color: #e67300;
+}
+
+.seat.taken {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Confirmation Styling */
+.confirmation-details {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.confirmation-details p {
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.btn-confirm {
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-confirm:hover {
+    background-color: #218838;
+}
+
+.btn-orange {
+    background-color: #f57c00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-orange:hover {
+    background-color: #e67e22;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movie-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-banner-vertical {
+        width: 100%;
+        height: auto;
+    }
+
+    .movie-details {
+        text-align: center;
+    }
+}

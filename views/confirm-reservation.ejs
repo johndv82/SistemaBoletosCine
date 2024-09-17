@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Reserva - CineTickets</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/reservation.css">
+</head>
+<body>
+    <div class="fullscreen-container">
+        <!-- Navbar (Opcional) -->
+        <div class="navbar">
+            <h1>CineTickets</h1>
+        </div>
+        <div class="content">
+            <h2 class="text-center">Confirmar Reserva</h2>
+            <div class="confirmation-details">
+                <p><strong>Película:</strong> Película A</p>
+                <p><strong>Fecha:</strong> 15 de septiembre de 2024</p>
+                <p><strong>Hora:</strong> 18:30</p>
+                <p><strong>Asientos:</strong> A1, A2</p>
+            </div>
+            <form action="/complete-reservation" method="POST">
+                <div class="mb-4">
+                    <label for="payment" class="form-label">Método de Pago</label>
+                    <select class="form-select" id="payment" name="payment" required>
+                        <option value="" disabled selected>Selecciona un método de pago</option>
+                        <option value="card">Tarjeta de Crédito/Débito</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-confirm">Confirmar y Pagar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
