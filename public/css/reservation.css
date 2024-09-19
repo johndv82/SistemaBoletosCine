@@ -1,6 +1,7 @@
 /* reservation.css */
 
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -22,6 +23,42 @@ body, html {
     background-color: #343a40;
     color: white;
     text-align: center;
+    position: relative;
+}
+
+.navbar .menu-usuario {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dropdown-menu {
+    background-color: #343a40;
+    /* Fondo oscuro */
+    border: none;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: orange;
+    /* Fondo naranja al hacer hover */
+    color: black;
+    /* Color de texto negro en hover */
+}
+
+.btn-usuario {
+    background-color: orange;
+    color: black;
+    border: none;
+}
+
+.btn-usuario:hover {
+    background-color: #e67e22;
+    /* Un tono más oscuro de naranja */
 }
 
 /* Content Area */

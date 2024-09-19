@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 //Configuración carpeta public
 app.use(express.static('public'));
-//Configuración Bootstrap
-app.use(express.static(path.join(__dirname, "node_modules/bootstrap/dist/")));
+//Configuración node_modules
+app.use(express.static(path.join(__dirname, "node_modules/")));
 
 // Rutas
 app.use(routesUser);
