@@ -1,40 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Seleccionar Asientos - CineTickets</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/reservation.css">
 </head>
+
 <body>
     <div class="fullscreen-container">
         <!-- Navbar (Opcional) -->
         <div class="navbar">
             <h1>CineTickets</h1>
+            <!-- Menú de Usuario a la Derecha -->
+            <div class="menu-usuario dropdown">
+                <button class="btn btn-usuario dropdown-toggle" type="button" id="menuUsuario" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Usuario
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuUsuario">
+                    <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+                    <li><a class="dropdown-item" href="#">Mis Compras</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                </ul>
+            </div>
         </div>
+
         <div class="content">
             <h2 class="text-center">Selecciona tus Asientos</h2>
-            <!-- Seat Grid (60 Seats) -->
-            <div class="seat-grid mt-4">
-                <!-- Generamos 60 asientos -->
-                <% for (let i = 1; i <= 60; i++) { %>
-                    <div class="seat" data-seat="A<%= i %>">A<%= i %></div>
-                <% } %>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Información de la Película
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= pelicula %>
+                            </h5>
+                            <p class="card-text"><strong>Fecha:</strong>
+                                <%= fecha %>
+                            </p>
+                            <p class="card-text"><strong>Sala:</strong>
+                                <%= sala %>
+                            </p>
+                            <p class="card-text"><strong>Hora:</strong>
+                                <%= horario %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Detalles de los asientos seleccionados -->
+                    <div id="details" class="card">
+                        <div class="card-header">Detalles de la Reservación</div>
+                        <div class="card-body">
+                            <p><strong>Asientos Seleccionados:</strong> <span id="selectedSeatsDisplay">Ninguno</span>
+                            </p>
+                            <p><strong>Precio Total:</strong> S/.<span id="totalPriceDisplay">0</span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Continue Button -->
-            <div class="mt-4 text-center">
-                <a href="confirm-reservation.html" class="btn btn-confirm">Confirmar Asientos</a>
-            </div>
+
+            <form id="seatsForm" action="/reservation" method="POST">
+                <!-- Seat Grid (60 Seats) -->
+                <div class="seat-grid mt-4">
+                    <!-- Generamos 60 asientos -->
+                    <% for (let i=1; i <=60; i++) { %>
+                        <div class="seat" data-seat="A<%= i %>" data-price="20">A<%= i %>
+                        </div>
+                        <% } %>
+                </div>
+                <div class="mt-4 text-center">
+                    <input type="hidden" name="selectedSeats" id="selectedSeats" value="">
+                    <input type="hidden" name="totalPrice" id="totalPrice" value="0">
+                    <button type="submit" class="btn btn-confirm">Confirmar Asientos</button>
+                </div>
+            </form>
         </div>
     </div>
+    <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Script para manejar la selección de asientos -->
     <script>
         const seats = document.querySelectorAll('.seat:not(.taken)');
         seats.forEach(seat => {
             seat.addEventListener('click', () => {
                 seat.classList.toggle('selected');
+                updateSelectedSeats();
             });
         });
+
+        function updateSelectedSeats() {
+            const selectedSeats = Array.from(document.querySelectorAll('.seat.selected')).map(seat => seat.getAttribute('data-seat'));
+            const totalPrice = Array.from(document.querySelectorAll('.seat.selected')).reduce((acc, seat) => {
+                return acc + parseFloat(seat.getAttribute('data-price'));
+            }, 0);
+            
+            // Actualizamos los campos ocultos
+            document.getElementById('selectedSeats').value = selectedSeats.join(',');
+            document.getElementById('totalPrice').value = totalPrice;
+
+            // Actualizamos la vista del detalle
+            document.getElementById('selectedSeatsDisplay').innerText = selectedSeats.length > 0 ? selectedSeats.join(', ') : 'Ninguno';
+            document.getElementById('totalPriceDisplay').innerText = totalPrice.toFixed(2);
+        }
     </script>
 </body>
+
 </html>

@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Confirmar Reserva - CineTickets</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/reservation.css">
 </head>
+
 <body>
     <div class="fullscreen-container">
         <!-- Navbar (Opcional) -->
         <div class="navbar">
             <h1>CineTickets</h1>
+            <!-- Menú de Usuario a la Derecha -->
+            <div class="menu-usuario dropdown">
+                <button class="btn btn-usuario dropdown-toggle" type="button" id="menuUsuario" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Usuario
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuUsuario">
+                    <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+                    <li><a class="dropdown-item" href="#">Mis Compras</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                </ul>
+            </div>
         </div>
         <div class="content">
             <h2 class="text-center">Confirmar Reserva</h2>
             <div class="confirmation-details">
-                <p><strong>Película:</strong> Película A</p>
-                <p><strong>Fecha:</strong> 15 de septiembre de 2024</p>
-                <p><strong>Hora:</strong> 18:30</p>
-                <p><strong>Asientos:</strong> A1, A2</p>
+                <p><strong>Película:</strong>
+                    <%= pelicula %>
+                </p>
+                <p><strong>Fecha:</strong> <%= fecha %></p>
+                <p><strong>Hora:</strong> <%= horario %></p>
+                <p><strong>Asientos:</strong> <%= asientos.join(', ') %></p>
+                <p><strong>Total a Pagar:</strong> S/. <%= total_price %></p>
             </div>
             <form action="/complete-reservation" method="POST">
                 <div class="mb-4">
@@ -35,5 +55,7 @@
             </form>
         </div>
     </div>
+    <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
