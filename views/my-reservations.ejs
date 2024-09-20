@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Compras - CineTickets</title>
+    <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/reservation.css">
+</head>
+
+<body>
+    <div class="fullscreen-container">
+        <!-- Navbar (Opcional) -->
+        <div class="navbar">
+            <h1>CineTickets</h1>
+            <!-- Menú de Usuario a la Derecha -->
+            <div class="menu-usuario dropdown">
+                <button class="btn btn-usuario dropdown-toggle" type="button" id="menuUsuario" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Usuario
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuUsuario">
+                    <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+                    <li><a class="dropdown-item" href="/reservations">Mis Compras</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <h1 class="mb-4">Mis Compras de Entradas</h1>
+        
+            <!-- Verificar si existen compras -->
+            <% if (compras.length === 0) { %>
+              <div class="alert alert-info" role="alert">
+                No tienes compras registradas.
+              </div>
+            <% } else { %>
+              <!-- Listar cada compra realizada -->
+              <% compras.forEach(function(compra) { %>
+                <div class="card mb-4">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="/img/<%= compra.movie.imageURL %>" class="img-fluid rounded-start" alt="Poster de <%= compra.movie.title %>">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h2 class="card-title"><%= compra.movie.title %></h2>
+                        <p class="card-text">
+                          <strong>Horario:</strong> <%= compra.movie.schedule %><br>
+                          <strong>Sala:</strong> <%= compra.movie.theater %><br>
+                          <strong>Fecha:</strong> <%= compra.movie.date %><br>
+                          <strong>Asientos:</strong> 
+                          <% compra.seats.forEach(function(seat, index) { %>
+                            <%= seat %><%= (index < compra.seats.length - 1) ? ', ' : '' %>
+                          <% }); %><br>
+                          <strong>Forma de pago:</strong> <%= compra.payment.method %><br>
+                          <strong>Total cancelado:</strong> $<%= compra.payment.total %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% }); %>
+            <% } %>
+        
+            <!-- Botón para regresar a la página principal -->
+            <div class="mt-4">
+                <a href="/" class="btn btn-primary">Volver al inicio</a>
+            </div>
+        </div>        
+    </div>
+    <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

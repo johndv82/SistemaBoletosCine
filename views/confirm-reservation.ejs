@@ -35,9 +35,14 @@
                 <p><strong>Película:</strong>
                     <%= pelicula %>
                 </p>
-                <p><strong>Fecha:</strong> <%= fecha %></p>
-                <p><strong>Hora:</strong> <%= horario %></p>
-                <p><strong>Asientos:</strong> <%= asientos.join(', ') %></p>
+                <p><strong>Fecha:</strong>
+                    <%= fecha %>
+                </p>
+                <p><strong>Hora:</strong>
+                    <%= horario %>
+                </p>
+                <p><strong>Asientos:</strong>
+                    <%= asientos.join(', ') %></p>
                 <p><strong>Total a Pagar:</strong> S/. <%= total_price %></p>
             </div>
             <form action="/complete-reservation" method="POST">
@@ -50,9 +55,22 @@
                     </select>
                 </div>
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-confirm">Confirmar y Pagar</button>
+                    <button type="submit" class="btn btn-confirm" id="btnConfirmar">Confirmar y Pagar</button>
                 </div>
             </form>
+        </div>
+        <div class="container mt-4">
+            <% if (estado === 'Reserved') { %>
+                <div class="alert alert-success" role="alert">
+                    <%- mensaje %>
+                </div>
+                <script>
+                    const button = document.getElementById('btnConfirmar');
+                    button.disabled = true;
+                    button.classList.remove('btn-confirm');
+                    button.classList.add('btn-secondary');
+                </script>
+            <% } %>
         </div>
     </div>
     <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
