@@ -22,7 +22,7 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuUsuario">
                     <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
-                    <li><a class="dropdown-item" href="#">Mis Compras</a></li>
+                    <li><a class="dropdown-item" href="/reservations">Mis Compras</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -56,7 +56,7 @@
                             <form action="/seats" method="POST">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <% movie.schedule.forEach((hora, index)=> { %>
-                                        <input type="radio" class="btn-check" name="horario"
+                                        <input type="radio" class="btn-check" name="hora"
                                             id="horario-<%= movieIndex %>-<%= index %>" value="<%= hora %>"
                                             autocomplete="off">
                                         <label class="btn btn-outline-primary"

@@ -6,73 +6,142 @@
     <title>Mis Compras - CineTickets</title>
     <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/reservation.css">
+
+    <style>
+      /* Estilos para hacer los cards más pequeños y compactos */
+      .card {
+        max-width: 600px;
+        margin: auto;
+      }
+      .qr-code {
+        max-width: 120px;
+        margin-top: 10px;
+        cursor: pointer; /* Para que el cursor cambie al pasar sobre el QR */
+      }
+      .modal-qr-code {
+        width: 250px; /* Tamaño del código QR en el modal */
+        height: 250px;
+        margin: auto;
+      }
+    </style>
 </head>
 
 <body>
-    <div class="fullscreen-container">
-        <!-- Navbar (Opcional) -->
-        <div class="navbar">
-            <h1>CineTickets</h1>
-            <!-- Menú de Usuario a la Derecha -->
-            <div class="menu-usuario dropdown">
-                <button class="btn btn-usuario dropdown-toggle" type="button" id="menuUsuario" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Usuario
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuUsuario">
-                    <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
-                    <li><a class="dropdown-item" href="/reservations">Mis Compras</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
-                </ul>
-            </div>
+  <div class="fullscreen-container">
+    <!-- Navbar (Opcional) -->
+    <div class="navbar">
+        <h1>CineTickets</h1>
+        <!-- Menú de Usuario a la Derecha -->
+        <div class="menu-usuario dropdown">
+            <button class="btn btn-usuario dropdown-toggle" type="button" id="menuUsuario" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Usuario
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuUsuario">
+                <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+                <li><a class="dropdown-item" href="/reservations">Mis Compras</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+            </ul>
         </div>
-        <div class="container mt-5">
-            <h1 class="mb-4">Mis Compras de Entradas</h1>
-        
-            <!-- Verificar si existen compras -->
-            <% if (compras.length === 0) { %>
-              <div class="alert alert-info" role="alert">
-                No tienes compras registradas.
-              </div>
-            <% } else { %>
-              <!-- Listar cada compra realizada -->
-              <% compras.forEach(function(compra) { %>
-                <div class="card mb-4">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="/img/<%= compra.movie.imageURL %>" class="img-fluid rounded-start" alt="Poster de <%= compra.movie.title %>">
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <h2 class="card-title"><%= compra.movie.title %></h2>
-                        <p class="card-text">
-                          <strong>Horario:</strong> <%= compra.movie.schedule %><br>
-                          <strong>Sala:</strong> <%= compra.movie.theater %><br>
-                          <strong>Fecha:</strong> <%= compra.movie.date %><br>
-                          <strong>Asientos:</strong> 
-                          <% compra.seats.forEach(function(seat, index) { %>
-                            <%= seat %><%= (index < compra.seats.length - 1) ? ', ' : '' %>
-                          <% }); %><br>
-                          <strong>Forma de pago:</strong> <%= compra.payment.method %><br>
-                          <strong>Total cancelado:</strong> $<%= compra.payment.total %>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% }); %>
-            <% } %>
-        
-            <!-- Botón para regresar a la página principal -->
-            <div class="mt-4">
-                <a href="/" class="btn btn-primary">Volver al inicio</a>
-            </div>
-        </div>        
     </div>
-    <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <div class="container mt-5">
+      <h1 class="mb-4">Mis Compras de Entradas</h1>
+  
+      <!-- Verificar si existen compras -->
+      <% if (compras.length === 0) { %>
+      <div class="alert alert-info" role="alert">
+        No tienes compras registradas.
+      </div>
+      <% } else { %>
+      <!-- Listar cada compra realizada -->
+      <% compras.forEach(function(compra) { %>
+      <div class="card mb-4">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="/img/<%= compra.movie.imageURL %>" class="img-fluid rounded-start" alt="Poster de <%= compra.movie.title %>">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= compra.movie.title %></h5>
+              <p class="card-text">
+                <strong>Horario:</strong> <%= compra.movie.schedule %><br>
+                <strong>Sala:</strong> <%= compra.movie.hour %><br>
+                <strong>Fecha:</strong> <%= compra.movie.date %><br>
+                <strong>Asientos:</strong> 
+                <% compra.seats.forEach(function(seat, index) { %>
+                  <%= seat %><%= (index < compra.seats.length - 1) ? ', ' : '' %>
+                <% }); %><br>
+                <strong>Forma de pago:</strong> <%= compra.payment.method %><br>
+                <strong>Total cancelado:</strong> $<%= compra.payment.total %>
+              </p>
 
+              <!-- Código QR generado a partir del ID de la reservación -->
+              <div id="qr-code-<%= compra.reservationId %>" class="qr-code" data-bs-toggle="modal" data-bs-target="#qrModal" data-reservation-id="<%= compra.reservationId %>"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+      <% } %>
+    
+        <!-- Botón para regresar a la página principal -->
+        <div class="mt-4">
+            <a href="/movies" class="btn btn-primary">Volver al inicio</a>
+        </div>
+    </div>      
+  </div>
+
+      <!-- Modal para mostrar el código QR más grande -->
+  <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="qrModalLabel">Código QR de Reservación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <!-- Aquí se cargará el QR ampliado -->
+          <div id="qrModalCode" class="modal-qr-code"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const compras = <%- JSON.stringify(compras) %>;
+    // Generar los códigos QR para cada reservación
+    compras.forEach(function(compra) {
+      var qrcode = new QRCode(document.getElementById("qr-code-"+compra.reservationId), {
+        text: compra.reservationId,
+        width: 100,
+        height: 100
+      });
+    });
+
+          // Evento para mostrar el QR más grande en el modal al hacer clic
+    var qrModal = document.getElementById('qrModal');
+    qrModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget; // Elemento que disparó el modal
+      var reservationId = button.getAttribute('data-reservation-id'); // Obtener el ID de la reservación
+
+      // Limpiar cualquier QR previo en el modal
+      var qrModalCode = document.getElementById("qrModalCode");
+      qrModalCode.innerHTML = "";
+
+      // Generar el código QR grande en el modal
+      new QRCode(qrModalCode, {
+        text: reservationId,
+        width: 250,
+        height: 250
+      });
+    });
+    </script>
+</body>
 </html>

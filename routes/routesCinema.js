@@ -7,7 +7,7 @@ const User = require('../database/User');
 
 let movie_select = {
     pelicula: '',
-    horario: '',
+    hora: '',
     fecha: '',
     sala: '',
     asientos: [],
@@ -24,8 +24,8 @@ router.get('/movies', async (req, res) => {
 });
 
 router.post('/seats', (req, res) => {
-    const { pelicula, horario, fecha, sala } = req.body;
-    movie_select = { ...movie_select, pelicula, horario, fecha, sala };
+    const { pelicula, hora, fecha, sala } = req.body;
+    movie_select = { ...movie_select, pelicula, hora, fecha, sala };
     res.render('select-seats', movie_select);
 });
 
@@ -50,7 +50,8 @@ router.post('/complete-reservation', async (req, res) => {
         const newReservation = new Reservation({
             user: idUsuario,
             movie: movie._id,
-            seats: movie_select.asientos
+            seats: movie_select.asientos,
+            hour: movie_select.hora
         });
         const savedReservation = await newReservation.save();
 
@@ -88,17 +89,17 @@ router.get('/reservations', async (req, res) => {
                     title: movie.title,
                     imageURL: movie.banner,
                     schedule: movie.schedule,
-                    theater: movie.room,
+                    hour: reservation.hour,
                     date: movie.date
                 },
                 seats: reservation.seats,
                 payment: {
                     method: payment.paymentMethod,
                     total: payment.amount
-                }
+                },
+                reservationId: reservation._id
             };
         }));
-        console.log(compras)
         res.render('my-reservations', {compras});
     } catch (error) {
         res.status(500).send("Error obteniendo las Compras");
