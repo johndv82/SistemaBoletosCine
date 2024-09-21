@@ -61,7 +61,7 @@ router.post('/reservation', (req, res) => {
 
 router.post('/complete-reservation', async (req, res) => {
     //Guardar Reservación
-    const user = await User.findOne({ email: 'ydenos@mail.com' });
+    const user = await User.findOne({ email: req.session.user });
     const movie = await Movie.findOne({ title: movie_select.pelicula });
     let idUsuario = user._id; //req.UserId;
 
@@ -94,7 +94,7 @@ router.post('/complete-reservation', async (req, res) => {
 
 router.get('/reservations', isAuthenticated, async (req, res) => {
     try {
-        const user = await User.findOne({ email: 'ydenos@mail.com' });
+        const user = await User.findOne({ email: req.session.user});
         const userId = user._id; //req.UserId;
 
         // 1. Buscar todas las reservaciones del usuario
