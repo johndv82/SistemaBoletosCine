@@ -85,8 +85,6 @@ router.post('/complete-reservation', async (req, res) => {
         });
         await newPayment.save();
 
-        req.io.emit('getSeatCount', { movieTitle: movie_select.pelicula, hour: movie_select.hora });
-
         movie_select.estado = 'Reserved';
         movie_select.mensaje = 'Reserva de entrada(s) finalizada con éxito. Puedes ver sus reservas aquí: <a href="/reservations">Mis Compras</a>.';
         res.render('confirm-reservation', movie_select);

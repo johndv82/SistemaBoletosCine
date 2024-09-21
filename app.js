@@ -8,7 +8,10 @@ const routesUser = require('./routes/routesUser');
 const routesCinema = require('./routes/routesCinema');
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    pingInterval: 10000, // Intervalo de ping para mantener la conexión
+    pingTimeout: 5000,   // Tiempo de espera para el ping
+});
 require('dotenv').config();
 const mongoose = require('./database/connect');  // Conexión a MongoDB
 const socketHandler = require('./sockets/socketHandler'); // Importa el manejador de sockets

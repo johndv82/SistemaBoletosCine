@@ -85,8 +85,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
-
         socket.on('seatCount', function(data) {
+            console.log("Escuchando del servidor ...");
             const { id, count } = data;
             const seatSpan = document.querySelector(`#seats-count-${id}`);
             seatSpan.textContent = count;

@@ -19,18 +19,20 @@
             <div class="confirmation-details">
                 <p><strong>Película:</strong>
                     <%= pelicula %>
+                    <input type="hidden" id="pelicula" value="<%= pelicula %>">
                 </p>
                 <p><strong>Fecha:</strong>
                     <%= fecha %>
                 </p>
                 <p><strong>Hora:</strong>
                     <%= hora %>
+                    <input type="hidden" id="hora" value="<%= hora %>">
                 </p>
                 <p><strong>Asientos:</strong>
                     <%= asientos.join(', ') %></p>
                 <p><strong>Total a Pagar:</strong> S/. <%= total_price %></p>
             </div>
-            <form action="/complete-reservation" method="POST">
+            <form action="/complete-reservation" method="POST" id="formConfirm">
                 <div class="mb-4">
                     <label for="payment" class="form-label">Método de Pago</label>
                     <select class="form-select" id="payment" name="payment" required>
@@ -62,15 +64,19 @@
     <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-         document.addEventListener('DOMContentLoaded', function () {
-            const socket = io();
+        const socket = io();
 
-            socket.on('seatCount', function(data) {
-                const { id, count } = data;
-                console.log(count);
-            });
-         });
+        document.getElementById('formConfirm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
+            const movie_title = document.getElementById("pelicula").value;
+            const hora = document.getElementById("hora").value;
+
+            // Emitir el evento a Socket.IO
+            socket.emit('getSeatCount', { movieTitle: movie_title, hour: hora });
+
+            this.submit(); // Limpia el formulario
+        });
 
     </script>
 </body>
