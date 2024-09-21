@@ -50,12 +50,20 @@ router.post('/login', async (req, res) => {
             return res.send('Correo o contraseña incorrectos');
         }
 
+        req.session.user = user.email;
+        req.session.admin = true;
+
         // Si las contraseñas coinciden, redirigir a la selección de películas
         res.redirect('/movies');
     } catch (error) {
         console.log(error);
         res.send('Error al iniciar sesión');
     }
+});
+
+router.get('/logout', function (req, res) {
+    req.session.destroy();
+    res.redirect('/');
 });
 
 module.exports = router;

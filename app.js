@@ -13,9 +13,9 @@ require('dotenv').config();
 const mongoose = require('./database/connect');  // Conexión a MongoDB
 
 app.use(session({
-    secret: 'your_secret_key',  // Cambia esto por una clave secreta real
-    resave: false,
-    saveUninitialized: false
+    secret: '12345',  // Cambia esto por una clave secreta real
+    resave: true,
+    saveUninitialized: true
 }));
 
 // Configurar body-parser 

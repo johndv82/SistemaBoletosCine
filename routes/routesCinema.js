@@ -17,14 +17,13 @@ let movie_select = {
 
 // Middleware para verificar si el usuario está autenticado
 function isAuthenticated(req, res, next) {
-    if (req.session.user) {
+    if (req.session && req.session.user && req.session.admin)
         return next();
-    } else {
+    else
         res.redirect('/');
-    }
 }
 
-router.get('/movies', async (req, res) => {
+router.get('/movies', isAuthenticated, async (req, res) => {
     try {
         const movies = await Movie.find(); // Obteniendo las películas de MongoDB
         res.render('select-movie', { movies });
@@ -93,7 +92,7 @@ router.post('/complete-reservation', async (req, res) => {
     }
 });
 
-router.get('/reservations', async (req, res) => {
+router.get('/reservations', isAuthenticated, async (req, res) => {
     try {
         const user = await User.findOne({ email: 'ydenos@mail.com' });
         const userId = user._id; //req.UserId;
