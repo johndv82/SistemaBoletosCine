@@ -84,8 +84,13 @@
         </div>
     </div>
     <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
     <!-- Script para manejar la selección de asientos -->
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const socket = io();
+        });
         const seats = document.querySelectorAll('.seat:not(.taken)');
         seats.forEach(seat => {
             seat.addEventListener('click', () => {

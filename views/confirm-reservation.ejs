@@ -60,6 +60,19 @@
         </div>
     </div>
     <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function () {
+            const socket = io();
+
+            socket.on('seatCount', function(data) {
+                const { id, count } = data;
+                console.log(count);
+            });
+         });
+
+
+    </script>
 </body>
 
 </html>
