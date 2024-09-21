@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const routesUser = require('./routes/routesUser');
 const routesCinema = require('./routes/routesCinema');
@@ -11,6 +12,11 @@ const io = socketIo(server);
 require('dotenv').config();
 const mongoose = require('./database/connect');  // Conexión a MongoDB
 
+app.use(session({
+    secret: 'your_secret_key',  // Cambia esto por una clave secreta real
+    resave: false,
+    saveUninitialized: false
+}));
 
 // Configurar body-parser 
 app.use(bodyParser.urlencoded({ extended: true }));

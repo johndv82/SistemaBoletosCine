@@ -15,6 +15,15 @@ let movie_select = {
     asientos_reservados: []
 };
 
+// Middleware para verificar si el usuario está autenticado
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        return next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 router.get('/movies', async (req, res) => {
     try {
         const movies = await Movie.find(); // Obteniendo las películas de MongoDB

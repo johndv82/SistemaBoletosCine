@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../database/User');
+const bcrypt = require('bcryptjs');
 
 router.get('/', (req, res) => {
     res.render('login');
@@ -19,7 +20,10 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-        const user = new User({ firstName, lastName, email, password });
+        // Generar el hash de la contraseña
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = new User({ firstName, lastName, email, password: hashedPassword });
         await user.save();
         res.redirect('/');
     } catch (error) {
@@ -28,18 +32,26 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login de usuario
+/// Login de usuario
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
 
-        if (!user || user.password !== password) {
+        if (!user) {
             return res.send('Correo o contraseña incorrectos');
         }
 
-        res.redirect('/selectmovie'); // Redirige a selección de películas si el login es exitoso
+        // Comparar la contraseña ingresada con el hash almacenado
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.send('Correo o contraseña incorrectos');
+        }
+
+        // Si las contraseñas coinciden, redirigir a la selección de películas
+        res.redirect('/movies');
     } catch (error) {
         console.log(error);
         res.send('Error al iniciar sesión');
