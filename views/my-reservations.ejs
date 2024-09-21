@@ -67,8 +67,8 @@
             <div class="card-body">
               <h5 class="card-title"><%= compra.movie.title %></h5>
               <p class="card-text">
-                <strong>Horario:</strong> <%= compra.movie.schedule %><br>
-                <strong>Sala:</strong> <%= compra.movie.hour %><br>
+                <strong>Horario:</strong> <%= compra.movie.hour %><br>
+                <strong>Sala:</strong> <%= compra.movie.room %><br>
                 <strong>Fecha:</strong> <%= compra.movie.date %><br>
                 <strong>Asientos:</strong> 
                 <% compra.seats.forEach(function(seat, index) { %>
@@ -107,7 +107,7 @@
           <div id="qrModalCode" class="modal-qr-code"></div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <span>Escanea el código para validar la compra.</span>
         </div>
       </div>
     </div>

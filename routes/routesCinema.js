@@ -11,7 +11,8 @@ let movie_select = {
     fecha: '',
     sala: '',
     asientos: [],
-    total_price: 0
+    total_price: 0,
+    asientos_reservados: []
 };
 
 router.get('/movies', async (req, res) => {
@@ -23,10 +24,22 @@ router.get('/movies', async (req, res) => {
     }
 });
 
-router.post('/seats', (req, res) => {
+router.post('/seats', async (req, res) => {
     const { pelicula, hora, fecha, sala } = req.body;
     movie_select = { ...movie_select, pelicula, hora, fecha, sala };
-    res.render('select-seats', movie_select);
+    try {
+        const movie = await Movie.findOne({ title: movie_select.pelicula });
+        const reservaciones = await Reservation.find({
+            movie: movie,
+            hour: hora 
+        });
+        movie_select.asientos_reservados = reservaciones.map(reservacion => reservacion.seats).flat();
+        res.render('select-seats', movie_select);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error al obtener los asientos reservados');
+    }
+
 });
 
 router.post('/reservation', (req, res) => {
@@ -88,7 +101,7 @@ router.get('/reservations', async (req, res) => {
                 movie: {
                     title: movie.title,
                     imageURL: movie.banner,
-                    schedule: movie.schedule,
+                    room: movie.room,
                     hour: reservation.hour,
                     date: movie.date
                 },

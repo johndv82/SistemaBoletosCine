@@ -6,6 +6,12 @@
     <title>Seleccionar Asientos - CineTickets</title>
     <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/reservation.css">
+    <style rel="stylesheet">
+        .seat.disabled {
+            background-color: #f74242;
+            pointer-events: none; /* Esto evita que se pueda seleccionar el asiento */
+        }
+    </style>
 </head>
 
 <body>
@@ -56,15 +62,23 @@
                 <!-- Seat Grid (60 Seats) -->
                 <div class="seat-grid mt-4">
                     <!-- Generamos 60 asientos -->
-                    <% for (let i=1; i <=60; i++) { %>
-                        <div class="seat" data-seat="A<%= i %>" data-price="20">A<%= i %>
+                    <% for (let i = 1; i <= 60; i++) { 
+                        const asiento = `A${i}`;
+                        const reservado = asientos_reservados.includes(asiento);
+                    %>
+                        <div class="seat <%= reservado ? 'disabled' : '' %>" 
+                             data-seat="A<%= i %>" 
+                             data-price="20"
+                             <%= reservado ? 'disabled' : '' %>>
+                             A<%= i %>
                         </div>
-                        <% } %>
+                    <% } %>
                 </div>
                 <div class="mt-4 text-center">
                     <input type="hidden" name="selectedSeats" id="selectedSeats" value="">
                     <input type="hidden" name="totalPrice" id="totalPrice" value="0">
                     <button type="submit" class="btn btn-confirm">Confirmar Asientos</button>
+                    <a class="btn btn-danger btn-lg" href="/movies">Cancelar</a>
                 </div>
             </form>
         </div>
